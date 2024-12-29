@@ -57,6 +57,7 @@ const ImageSelector = (props: { user: string; }) => {
   const fetchWhiteboards = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/whiteboards`);
+      console.log('response: ', response)
       const data = await response.json();
       // setWhiteboards(data.whiteboards)
       PRESET_IMAGES = data.whiteboards.map((datum: Image) =>  {
