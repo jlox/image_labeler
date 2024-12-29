@@ -6,7 +6,12 @@ import json
 import csv
 from pathlib import Path
 import logging
+import os
 # import account
+
+frontend_url = os.environ.get('REACT_FRONTEND_URL', 'http://localhost:3000')
+debug = os.environ.get('DEBUG', 'True') == 'True'
+# secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key')
 
 logger = logging.getLogger('uvicorn.error')
 logger.setLevel(logging.DEBUG)
@@ -15,7 +20,7 @@ app = FastAPI()
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[frontend_url],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

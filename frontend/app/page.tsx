@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import ImageSelector from '../components/ImageSelector';
 import Downloader from '../components/Downloader';
 
@@ -8,27 +8,13 @@ export default function Home() {
   const [user, setUser] = useState('');
   const [name, setName] = useState('');
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     setUser(name);
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   }
-
-  // const handleExport = async (e) => {
-  //   try {
-  //     const response = await fetch('http://localhost:8000/export');
-  //     if (!response.ok) throw new Error('Failed to fetch data');
-  //     const result = await response.json();
-  //     setData(result);
-  //     setError(null);
-  //   } catch (err) {
-  //     setError(err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
 
   return (
     <main className="min-h-screen bg-gray-100 py-8">

@@ -63,8 +63,11 @@ const ImageSelector = (props) => {
   };
 
   const saveSelections = async (imageId: string, selectionsList) => {
+    console.log('imageId: ', imageId)
+    console.log('selectionsList: ', selectionsList)
     try {
       const selectedImage = PRESET_IMAGES.find(img => img.id === imageId);
+      console.log('selectedImage: ', selectedImage)
       await fetch('http://localhost:8000/save-selections/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
