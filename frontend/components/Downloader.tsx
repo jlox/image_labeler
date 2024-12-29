@@ -9,12 +9,13 @@ const Downloader = () => {
       if (!data?.length) return;
       
       // Get all unique headers
-      const headers = [...new Set(data.flatMap(obj => Object.keys(obj)))].sort();
+      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+      const headers = [...new Set<string>(data.flatMap((obj: {}) => Object.keys(obj)))].sort();
       
       // Create CSV content
       const csvRows = [
         headers.join(','),
-        ...data.map(obj =>
+        ...data.map((obj: { [x: string]: string; }) =>
           headers.map(header => {
             const value = obj[header] ?? '';
             return `"${String(value).replace(/"/g, '""')}"`;

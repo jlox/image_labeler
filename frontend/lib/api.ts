@@ -11,6 +11,7 @@ export const uploadImage = async (file: File) => {
   return response.json();
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const saveSelections = async (imageId: string, selections: any[]) => {
   const response = await fetch(`${API_BASE_URL}/save-selections/`, {
     method: 'POST',

@@ -1,22 +1,47 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
 let PRESET_IMAGES = [
   {
-    id: 1,
+    id: 'tmp',
     title: 'Mountain Landscape',
     src: null,
   },
 ];
 
-const ImageSelector = (props) => {
+const ImageSelector = (props: { user: string; }) => {
   // const [whiteboards, setWhiteboards] = useState([]);
+  interface Image {
+    image_id: string;
+    image_url: string;
+  };
+
+  interface Selection {
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    transcription: string,
+    confidence: string,
+    user: string,
+    image_name: string,
+    image_url: string,
+    timestamp: Date,
+  };
+
+  interface SelectionObject {
+    [key: string]: Selection[]
+  }
+
   const [selectedImageId, setSelectedImageId] = useState(PRESET_IMAGES[0].id);
-  const [selections, setSelections] = useState({});
+  const [selections, setSelections] = useState<SelectionObject>({});
   const [isDrawing, setIsDrawing] = useState(false);
   const [currentSelection, setCurrentSelection] = useState({ x: 0, y: 0, width: 0, height: 0 });
   const [editingField, setEditingField] = useState(null);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState('')
 
   useEffect(() => {
@@ -25,20 +50,14 @@ const ImageSelector = (props) => {
   }, [])
   useEffect(() => {
     fetchSelections(props.user, selectedImageId);
-  }, [selectedImageId]);
-
-  interface Image {
-    id: string;
-    title: string;
-    src: string;
-  };
+  }, [selectedImageId, props.user]);
 
   const fetchWhiteboards = async () => {
     try {
       const response = await fetch('http://localhost:8000/whiteboards');
       const data = await response.json();
       // setWhiteboards(data.whiteboards)
-      PRESET_IMAGES = data.whiteboards.map(datum =>  {
+      PRESET_IMAGES = data.whiteboards.map((datum: Image) =>  {
         return {
           id: datum.image_id,
           title: datum.image_id,
@@ -51,7 +70,7 @@ const ImageSelector = (props) => {
     }
   };
 
-  const fetchSelections = async (userId, imageId) => {
+  const fetchSelections = async (userId: any, imageId: string) => {
     try {
       const response = await fetch(`http://localhost:8000/user/${userId}/image/${imageId}/selections`);
       // const response = await fetch('http://localhost:8000/selections')
@@ -62,11 +81,9 @@ const ImageSelector = (props) => {
     }
   };
 
-  const saveSelections = async (imageId: string, selectionsList) => {
-    console.log('imageId: ', imageId)
-    console.log('selectionsList: ', selectionsList)
+  const saveSelections = async (imageId: string, selectionsList: { [x: string]: any; }) => {
     try {
-      const selectedImage = PRESET_IMAGES.find(img => img.id === imageId);
+      const selectedImage = PRESET_IMAGES.find(img => img.id === imageId) || PRESET_IMAGES[0];
       console.log('selectedImage: ', selectedImage)
       await fetch('http://localhost:8000/save-selections/', {
         method: 'POST',
@@ -83,8 +100,8 @@ const ImageSelector = (props) => {
     }
   };
 
-  const handleDeleteSelection = (indexToDelete) => {
-    const updatedSelections = (selections[selectedImageId] || []).filter((_, index) => index !== indexToDelete);
+  const handleDeleteSelection = (indexToDelete: any) => {
+    const updatedSelections = (selections[selectedImageId as keyof typeof selections] || []).filter((_: any, index: any) => index !== indexToDelete);
     setSelections(prev => ({
       ...prev,
       [selectedImageId]: updatedSelections
@@ -93,13 +110,13 @@ const ImageSelector = (props) => {
   };
 
   // ... (previous mouse handling functions remain the same)
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e: any) => {
     const { x, y } = getMousePosition(e);
     setIsDrawing(true);
     setCurrentSelection({ x, y, width: 0, height: 0 });
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: any) => {
     if (!isDrawing) return;
     const { x, y } = getMousePosition(e);
     setCurrentSelection(prev => ({
@@ -113,37 +130,40 @@ const ImageSelector = (props) => {
     if (!isDrawing) return;
     setIsDrawing(false);
     if (currentSelection.width && currentSelection.height) {
-      const normalized = {
+      const normalized: Selection = {
         x: currentSelection.width > 0 ? currentSelection.x : currentSelection.x + currentSelection.width,
         y: currentSelection.height > 0 ? currentSelection.y : currentSelection.y + currentSelection.height,
         width: Math.abs(currentSelection.width),
         height: Math.abs(currentSelection.height),
         transcription: '',
         confidence: '',
-        user: props.user,
-        image_name: PRESET_IMAGES.find(img => img.id === selectedImageId).title,
-        image_url: PRESET_IMAGES.find(img => img.id === selectedImageId).src,
+        user: props.user || '',
+        image_name: (PRESET_IMAGES.find(img => img.id === selectedImageId) || PRESET_IMAGES[0]).title || '',
+        image_url: (PRESET_IMAGES.find(img => img.id === selectedImageId) || PRESET_IMAGES[0]).src || '',
         timestamp: new Date(),
       };
       
       const updatedSelections = [...(selections[selectedImageId] || []), normalized];
-      setSelections(prev => ({
-        ...prev,
-        [selectedImageId]: updatedSelections
-      }));
+      setSelections({ ...selections, [selectedImageId]: updatedSelections})
+      // setSelections(prev => {
+      //   return ({
+      //     ...selections,
+      //     [selectedImageId]: updatedSelections
+      //   });
+      // });
       // saveSelections(selectedImageId, updatedSelections);
     }
   };
 
-  const getMousePosition = (e) => {
-    const rect = containerRef.current.getBoundingClientRect();
+  const getMousePosition = (e: { clientX: number; clientY: number; }) => {
+    const rect = containerRef && containerRef.current ? containerRef.current.getBoundingClientRect() : {left:0, top:0};
     return {
       x: e.clientX - rect.left,
       y: e.clientY - rect.top
     };
   };
 
-  const handleFieldChange = (index, field, value) => {
+  const handleFieldChange = (index: number, field: string, value: string) => {
     const updatedSelections = [...(selections[selectedImageId] || [])];
     updatedSelections[index] = { ...updatedSelections[index], [field]: value };
     setSelections(prev => ({
@@ -154,16 +174,16 @@ const ImageSelector = (props) => {
     setEditingField(null);
   };
 
-  const handleImageSelect = (imageId) => {
+  const handleImageSelect = (imageId:string) => {
     setSelectedImageId(imageId);
     setEditingField(null);
   };
-  const preventDragHandler = (e) => {
+  const preventDragHandler = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
   }
 
   const currentSelectionsList = selections[selectedImageId] || [];
-  const selectedImage = PRESET_IMAGES.find(img => img.id === selectedImageId);
+  const selectedImage = PRESET_IMAGES.find(img => img.id === selectedImageId) || PRESET_IMAGES[0];
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
@@ -185,7 +205,7 @@ const ImageSelector = (props) => {
             }`}
           >
             <img
-              src={image.src}
+              src={image.src || ''}
               alt={image.title}
               className="w-24 h-16 object-cover rounded"
             />
@@ -205,7 +225,7 @@ const ImageSelector = (props) => {
         onDragStart={preventDragHandler}
       >
         <img 
-          src={selectedImage.src}
+          src={selectedImage.src || ''}
           alt={selectedImage.title}
           className="w-full h-full object-contain"
         />
