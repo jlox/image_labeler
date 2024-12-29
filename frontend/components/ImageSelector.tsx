@@ -56,6 +56,7 @@ const ImageSelector = (props: { user: string; }) => {
 
   const fetchWhiteboards = async () => {
     try {
+      console.log('API_BASE_URL: ', API_BASE_URL)
       const response = await fetch(`${API_BASE_URL}/whiteboards`);
       console.log('response: ', response)
       const data = await response.json();
