@@ -14,6 +14,8 @@ let PRESET_IMAGES = [
 
 const ImageSelector = (props: { user: string; }) => {
   // const [whiteboards, setWhiteboards] = useState([]);
+
+  const API_BASE_URL = process.env.REACT_APP_API_URL;;
   interface Image {
     image_id: string;
     image_url: string;
@@ -54,7 +56,7 @@ const ImageSelector = (props: { user: string; }) => {
 
   const fetchWhiteboards = async () => {
     try {
-      const response = await fetch('http://localhost:8000/whiteboards');
+      const response = await fetch(`${API_BASE_URL}/whiteboards`);
       const data = await response.json();
       // setWhiteboards(data.whiteboards)
       PRESET_IMAGES = data.whiteboards.map((datum: Image) =>  {
@@ -72,8 +74,7 @@ const ImageSelector = (props: { user: string; }) => {
 
   const fetchSelections = async (userId: any, imageId: string) => {
     try {
-      const response = await fetch(`http://localhost:8000/user/${userId}/image/${imageId}/selections`);
-      // const response = await fetch('http://localhost:8000/selections')
+      const response = await fetch(`${API_BASE_URL}/user/${userId}/image/${imageId}/selections`);
       const data = await response.json();
       setSelections(prev => ({ ...prev, ...data.selections }));
     } catch (error) {
@@ -85,7 +86,7 @@ const ImageSelector = (props: { user: string; }) => {
     try {
       const selectedImage = PRESET_IMAGES.find(img => img.id === imageId) || PRESET_IMAGES[0];
       console.log('selectedImage: ', selectedImage)
-      await fetch('http://localhost:8000/save-selections/', {
+      await fetch(`${API_BASE_URL}/save-selections/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

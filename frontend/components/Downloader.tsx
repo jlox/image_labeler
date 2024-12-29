@@ -1,9 +1,10 @@
 import React from 'react';
+const API_BASE_URL = process.env.REACT_APP_API_URL;;
 
 const Downloader = () => {
   const handleDownload = async () => {
     try {
-      const response = await fetch('http://localhost:8000/export');
+      const response = await fetch(`${API_BASE_URL}/export`);
       const { data } = await response.json();
       
       if (!data?.length) return;
