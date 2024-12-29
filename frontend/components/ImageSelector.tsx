@@ -15,7 +15,7 @@ let PRESET_IMAGES = [
 const ImageSelector = (props: { user: string; }) => {
   // const [whiteboards, setWhiteboards] = useState([]);
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
+  const API_BASE_URL = process.env.REACT_APP_API_URL || '';
   interface Image {
     image_id: string;
     image_url: string;
@@ -57,7 +57,7 @@ const ImageSelector = (props: { user: string; }) => {
   const fetchWhiteboards = async () => {
     try {
       console.log('API_BASE_URL: ', API_BASE_URL)
-      const response = await fetch(`${API_BASE_URL}/whiteboards`, {mode: 'no-cors'});
+      const response = await fetch(`${API_BASE_URL}/whiteboards`);
       console.log('response: ', response)
       const data = await response.json();
       // setWhiteboards(data.whiteboards)
@@ -76,7 +76,7 @@ const ImageSelector = (props: { user: string; }) => {
 
   const fetchSelections = async (userId: any, imageId: string) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/user/${userId}/image/${imageId}/selections`, {mode: 'no-cors'});
+      const response = await fetch(`${API_BASE_URL}/user/${userId}/image/${imageId}/selections`);
       const data = await response.json();
       setSelections(prev => ({ ...prev, ...data.selections }));
     } catch (error) {
