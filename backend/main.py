@@ -22,7 +22,7 @@ app = FastAPI()
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_url],
+    allow_origins=[frontend_url, 'https://image-labeling-frontend.vercel.app'],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
