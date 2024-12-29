@@ -24,7 +24,7 @@ export default function Home() {
           <label>
             Name: <input onChange={(e) => handleChange(e)} name="user" />
           </label>
-          <button onClick={(e) => handleClick(e)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Log in</button>
+          <button onClick={() => handleClick()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Log in</button>
         </div>
       ) : (
         <div className="container mx-auto px-4">
