@@ -76,7 +76,7 @@ const ImageSelector = (props: { user: string; }) => {
 
   const fetchSelections = async (userId: any, imageId: string) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/user/${userId}/image/${imageId}/selections`);
+      const response = await fetch(`${API_BASE_URL}/user/${userId}/image/${imageId}/selections`, {mode: 'no-cors'});
       const data = await response.json();
       setSelections(prev => ({ ...prev, ...data.selections }));
     } catch (error) {
