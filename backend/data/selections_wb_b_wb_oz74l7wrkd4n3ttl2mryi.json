@@ -1,0 +1,50 @@
+[
+  {
+    "x": 72.5,
+    "y": 71.0,
+    "width": 141.0,
+    "height": 91.0,
+    "transcription": "3x - 2y",
+    "user": "a",
+    "confidence": "1231231",
+    "image_name": "wb_b_wb_oz74l7wrkd4n3ttl2mryi",
+    "image_url": "https://onnqckcdtgkezqrwvgrs.supabase.co/storage/v1/object/sign/internal/whiteboard-segmenter/whiteboard_kvmaavpqfz446gbl?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbnRlcm5hbC93aGl0ZWJvYXJkLXNlZ21lbnRlci93aGl0ZWJvYXJkX2t2bWFhdnBxZno0NDZnYmwiLCJpYXQiOjE3MjYzMDY2NDAsImV4cCI6MjA0MTY2NjY0MH0.YDNmmciEZWe_4DgESWBktWaNm87vAJtaR7xEoubeVpY",
+    "timestamp": "2024-12-28T19:43:58.387Z"
+  },
+  {
+    "x": 74.5,
+    "y": 82.0,
+    "width": 138.0,
+    "height": 74.0,
+    "transcription": "3x - 2y",
+    "user": "jeanne",
+    "confidence": "10",
+    "image_name": "wb_b_wb_oz74l7wrkd4n3ttl2mryi",
+    "image_url": "https://onnqckcdtgkezqrwvgrs.supabase.co/storage/v1/object/sign/internal/whiteboard-segmenter/whiteboard_kvmaavpqfz446gbl?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbnRlcm5hbC93aGl0ZWJvYXJkLXNlZ21lbnRlci93aGl0ZWJvYXJkX2t2bWFhdnBxZno0NDZnYmwiLCJpYXQiOjE3MjYzMDY2NDAsImV4cCI6MjA0MTY2NjY0MH0.YDNmmciEZWe_4DgESWBktWaNm87vAJtaR7xEoubeVpY",
+    "timestamp": "2024-12-28T20:32:04.853Z"
+  },
+  {
+    "x": 208.5,
+    "y": 87.0,
+    "width": 161.0,
+    "height": 56.0,
+    "transcription": "2y - 3x",
+    "user": "abe",
+    "confidence": "10",
+    "image_name": "wb_b_wb_oz74l7wrkd4n3ttl2mryi",
+    "image_url": "https://onnqckcdtgkezqrwvgrs.supabase.co/storage/v1/object/sign/internal/whiteboard-segmenter/whiteboard_kvmaavpqfz446gbl?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbnRlcm5hbC93aGl0ZWJvYXJkLXNlZ21lbnRlci93aGl0ZWJvYXJkX2t2bWFhdnBxZno0NDZnYmwiLCJpYXQiOjE3MjYzMDY2NDAsImV4cCI6MjA0MTY2NjY0MH0.YDNmmciEZWe_4DgESWBktWaNm87vAJtaR7xEoubeVpY",
+    "timestamp": "2024-12-28T20:32:28.941Z"
+  },
+  {
+    "x": 400.5,
+    "y": 90.0,
+    "width": 58.0,
+    "height": 43.0,
+    "transcription": "9x",
+    "user": "abe",
+    "confidence": "10",
+    "image_name": "wb_b_wb_oz74l7wrkd4n3ttl2mryi",
+    "image_url": "https://onnqckcdtgkezqrwvgrs.supabase.co/storage/v1/object/sign/internal/whiteboard-segmenter/whiteboard_kvmaavpqfz446gbl?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbnRlcm5hbC93aGl0ZWJvYXJkLXNlZ21lbnRlci93aGl0ZWJvYXJkX2t2bWFhdnBxZno0NDZnYmwiLCJpYXQiOjE3MjYzMDY2NDAsImV4cCI6MjA0MTY2NjY0MH0.YDNmmciEZWe_4DgESWBktWaNm87vAJtaR7xEoubeVpY",
+    "timestamp": "2024-12-28T23:47:56.225Z"
+  }
+]
