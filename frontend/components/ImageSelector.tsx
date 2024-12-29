@@ -15,7 +15,7 @@ let PRESET_IMAGES = [
 const ImageSelector = (props: { user: string; }) => {
   // const [whiteboards, setWhiteboards] = useState([]);
 
-  const API_BASE_URL = process.env.REACT_APP_API_URL;;
+  const API_BASE_URL = process.env.API_URL;;
   interface Image {
     image_id: string;
     image_url: string;
