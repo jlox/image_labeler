@@ -11,11 +11,13 @@ import os
 
 frontend_url = os.environ.get('REACT_FRONTEND_URL', 'http://localhost:3000')
 debug = os.environ.get('DEBUG', 'True') == 'True'
+port = int(os.environ.get('PORT', 10000)) 
 # secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key')
 
 logger = logging.getLogger('uvicorn.error')
 logger.setLevel(logging.DEBUG)
 app = FastAPI()
+# port = process.env.PORT || 8000;
 
 # Enable CORS
 app.add_middleware(
@@ -152,4 +154,4 @@ async def prepare_export_data():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)
