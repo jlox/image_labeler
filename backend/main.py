@@ -9,7 +9,7 @@ import logging
 import os
 # import account
 
-frontend_url = os.environ.get('REACT_FRONTEND_URL', 'http://localhost:3000')
+frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
 debug = os.environ.get('DEBUG', 'True') == 'True'
 port = int(os.environ.get('PORT', 10000)) 
 # secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key')
